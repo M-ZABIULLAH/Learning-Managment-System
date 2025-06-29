@@ -35,12 +35,12 @@ jobs:
         pip install -r backend/requirements.txt
 
     - name: Run migrations
-          env:
-            DB_HOST: 127.0.0.1
-            DB_PORT: 3306
-            DB_NAME: lmsdb
-            DB_USER: lmsuser
-            DB_PASSWORD: lms123
+      env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_NAME: lmsdb
+          DB_USER: lmsuser
+          DB_PASSWORD: lms123
 
       run: |
         cd backend
