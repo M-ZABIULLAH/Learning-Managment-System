@@ -1,0 +1,30 @@
+name: Lint Backend
+
+on:
+  pull_request:
+    paths:
+      - "backend/**.py"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dev dependencies
+      run: |
+        pip install black flake8
+
+    - name: Run Black
+      run: black --check backend/
+
+    - name: Run Flake8
+      run: flake8 backend/
+
