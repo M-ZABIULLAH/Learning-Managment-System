@@ -1,0 +1,30 @@
+name: Lint Frontend
+
+on:
+  pull_request:
+    paths:
+      - "frontend/**.js"
+      - "frontend/**.jsx"
+      - "frontend/**.ts"
+      - "frontend/**.tsx"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Run eslint
+        run: |
+          cd frontend
+          npm run lint
+
