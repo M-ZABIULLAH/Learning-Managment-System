@@ -1,15 +1,15 @@
-name: Run Unit Test
+name: Run Unit Tests
 
-On: 
-    push:
-        Branche:
-            -develop
-    pull_request:
-        Branche:
-            -develop
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
 
-jobs: 
-    unit-test:
+jobs:
+  unit-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,3 +28,4 @@ jobs:
 
       - name: Run unit tests with pytest
         run: pytest --maxfail=1 --disable-warnings -q
+
