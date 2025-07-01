@@ -1,0 +1,36 @@
+name: Auto-format with Black
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Black
+        run: pip install black
+
+      - name: Run Black
+        run: black backend/
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add backend/
+          git diff --quiet && git diff --staged --quiet || git commit -m "style: auto-format with black"
+          git push
+
